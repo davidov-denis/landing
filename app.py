@@ -27,9 +27,21 @@ def kypi_banan():
     return render_template("kypi_banan.html")
 
 
-@app.route("/price-counter/")
+@app.route("/price-counter/", methods=["GET", "POST"])
 def price_counter():
-    return render_template("price_counter.html")
+    printable = False
+    if request.method == "POST":
+        howmany = request.form.get("howmany")
+        price = int(howmany) * 6 * 10 ** 7
+        howmany = int(howmany) * 1000
+        return render_template("price_counter.html", howmany=howmany, price=price, printable=True)
+    return render_template("price_counter.html", printable=printable)
+
+
+@app.route("/contact/")
+def contact():
+    return render_template("contact.html")
+
 
 if __name__ == '__main__':
     app.run(debug=True)

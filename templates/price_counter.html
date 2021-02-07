@@ -12,16 +12,12 @@
       <li><a href="/price-counter/">Расчёт цен</a></li>
       <li><a href="/contact/">Контакты</a></li>
     </ul>
-    <select>
-        <option>Зелёные</option>
-        <option>Салатовые</option>
-        <option>Желтые</option>
-    </select>
-    <input id="color" type="number" placeholder="Количество партий по 1000кг">
-    <input type="button" placeholder="Расчитать" onclick="counter()">
-    <script>
-        function counter(){
-        }
-    </script>
+    <form action="" method="post">
+        <input name="howmany" type="number" placeholder="Количество партий по 1000кг">
+        <input type="submit" placeholder="Расчитать">
+    </form>
+    {% if printable %}
+        <p>{{ howmany }} кг бананов - {{ price }} &#8381;</p>
+    {% endif %}
 </body>
 </html>
