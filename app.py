@@ -27,5 +27,9 @@ def kypi_banan():
     return render_template("kypi_banan.html")
 
 
+@app.route("/price-counter/")
+def price_counter():
+    return render_template("price_counter.html")
+
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
