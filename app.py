@@ -24,7 +24,8 @@ def kypi_banan():
         howmany = request.form.get("howmany")
         color = request.form.get("color")
         price = howmany * 6 * 10 ** 7
-    return render_template("kypi_banan.html")
+        return render_template("kypi_banan.html", isOk=True)
+    return render_template("kypi_banan.html", isOk = True)
 
 
 @app.route("/price-counter/", methods=["GET", "POST"])
