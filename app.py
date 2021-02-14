@@ -5,6 +5,7 @@ import sqlite3
 app = Flask(__name__, static_folder="static")
 
 
+
 @app.route('/')
 def hello_world():
     return render_template("index.html")
@@ -23,7 +24,13 @@ def kypi_banan():
         promo = request.form.get("promo")
         howmany = request.form.get("howmany")
         color = request.form.get("color")
-        price = howmany * 6 * 10 ** 7
+        price = int(howmany) * 6 * 10 ** 7
+        print(price)
+        conn = sqlite3.connect("banana.db")
+        cur = conn.cursor()
+        cur.execute("""INSERT INTO orders VALUES (NULL,?,?,?,?,?,?,?,?,?,?,?)""", (name, email, phone, city, street, house, coords, howmany, color, price, False))
+        conn.commit()
+        conn.close()
         return render_template("kypi_banan.html", isOk=True)
     return render_template("kypi_banan.html", isOk = True)
 
