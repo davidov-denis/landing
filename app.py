@@ -5,6 +5,47 @@ import sqlite3
 app = Flask(__name__, static_folder="static")
 
 
+def to_db(name, email, phone, city, street, house, coords, howmany, color, price):
+    conn = sqlite3.connect("banana.db")
+    cur = conn.cursor()
+    cur.execute("""INSERT INTO orders VALUES (NULL,?,?,?,?,?,?,?,?,?,?,?)""",
+                (name, email, phone, city, street, house, coords, howmany, color, price, False))
+    conn.commit()
+    conn.close()
+
+
+def from_db_is_complete_true():
+    conn = sqlite3.connect("banana.db")
+    cur = conn.cursor()
+    is_complete_true = cur.execute("""SELECT * FROM orders WHERE iscomplet=true ORDER BY id DESC;""").fetchall()
+    conn.close()
+    return is_complete_true
+
+
+def from_db_is_complete_false():
+    conn = sqlite3.connect("banana.db")
+    cur = conn.cursor()
+    is_complete_false = cur.execute("""SELECT * FROM orders WHERE iscomplet=false ORDER BY id DESC;""").fetchall()
+    conn.close()
+    return is_complete_false
+
+
+def from_db_all():
+    conn = sqlite3.connect("banana.db")
+    cur = conn.cursor()
+    all_table = cur.execute("""SELECT * FROM orders ORDER BY id DESC;""").fetchall()
+    conn.close()
+    return all_table
+
+
+def update_db(id):
+    conn = sqlite3.connect("banana.db")
+    cur = conn.cursor()
+    sql = "UPDATE orders SET iscomplet=true WHERE id={}".format(id)
+    cur.execute(sql)
+    conn.commit()
+    conn.close()
+
 
 @app.route('/')
 def hello_world():
@@ -26,13 +67,9 @@ def kypi_banan():
         color = request.form.get("color")
         price = int(howmany) * 6 * 10 ** 7
         print(price)
-        conn = sqlite3.connect("banana.db")
-        cur = conn.cursor()
-        cur.execute("""INSERT INTO orders VALUES (NULL,?,?,?,?,?,?,?,?,?,?,?)""", (name, email, phone, city, street, house, coords, howmany, color, price, False))
-        conn.commit()
-        conn.close()
+        to_db(name, email, phone, city, street, house, coords, howmany, color, price)
         return render_template("kypi_banan.html", isOk=True)
-    return render_template("kypi_banan.html", isOk = True)
+    return render_template("kypi_banan.html", isOk=False)
 
 
 @app.route("/price-counter/", methods=["GET", "POST"])
