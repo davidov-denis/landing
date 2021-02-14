@@ -50,6 +50,9 @@ def price_counter():
 def contact():
     return render_template("contact.html")
 
+# UPDATE orders SET iscomplet=true WHERE id=5; ОБНОВЛЕНИЕ БАЗЫ ДАННЫХ
+# SELECT * FROM orders;
+
 
 if __name__ == '__main__':
     app.run(debug=True)
