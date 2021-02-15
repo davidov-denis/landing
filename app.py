@@ -1,8 +1,9 @@
-from flask import Flask, render_template, request
+from flask import Flask, redirect, render_template, request, session
 import sqlite3
 
 
 app = Flask(__name__, static_folder="static")
+app.config['SECRET_KEY'] = 'my-secret-key'
 
 
 def to_db(name, email, phone, city, street, house, coords, howmany, color, price):
@@ -71,6 +72,38 @@ def kypi_banan():
         return render_template("kypi_banan.html", isOk=True)
     return render_template("kypi_banan.html", isOk=False)
 
+
+@app.route("/admin/orders/")
+def order():
+    if "isAuth" in session:
+        if session.get("isAuth") == True:
+            all_table = from_db_all()
+            return render_template("orders.html", orders=all_table)
+        else:
+            return redirect("/admin/")
+    else:
+        return redirect("/admin/")
+
+
+@app.route("/admin/")
+def admin():
+    if "isAuth" in session:
+        if session.get("isAuth") == True:
+            return render_template("isAuth.html")
+        else:
+            return render_template("login.html")
+    else:
+        session["isAuth"] = False
+        return render_template("login.html")
+
+
+@app.route("/check/", methods=["get", "post"])
+def check():
+    if request.method == "POST":
+        password = request.form.get("password")
+        if password == "150105":
+            session["isAuth"] = True
+    return redirect("/admin/")
 
 @app.route("/price-counter/", methods=["GET", "POST"])
 def price_counter():

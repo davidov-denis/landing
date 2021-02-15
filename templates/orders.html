@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+  </head>
+<body>
+    <table border="1" style="border-collapse:collapse">
+        <tr>
+          <th>id</th>
+          <th>Имя</th>
+          <th>email</th>
+          <th>Номер телефона</th>
+          <th>Город</th>
+          <th>Улица</th>
+          <th>Дом</th>
+          <th>Координаты</th>
+          <th>Количество</th>
+          <th>Цвет</th>
+          <th>Цена</th>
+          <th>Статус</th>
+        </tr>
+        {% for order in orders %}
+            <tr>
+                <th>{{ order[0] }}</th>
+                <th>{{ order[1] }}</th>
+                <th>{{ order[2] }}</th>
+                <th>{{ order[3] }}</th>
+                <th>{{ order[4] }}</th>
+                <th>{{ order[5] }}</th>
+                <th>{{ order[6] }}</th>
+                <th>{{ order[7] }}</th>
+                <th>{{ order[8] }}</th>
+                <th>{{ order[9] }}</th>
+                <th>{{ order[10] }}</th>
+                {% if order[11] == 0 %}
+                    <th bgcolor="red">Не выполнен</th>
+                {% else %}
+                    <th bgcolor="lime">Выполнен</th>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
