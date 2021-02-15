@@ -42,7 +42,7 @@ def from_db_all():
 def update_db(id):
     conn = sqlite3.connect("banana.db")
     cur = conn.cursor()
-    sql = "UPDATE orders SET iscomplet=true WHERE id={}".format(id)
+    sql = "UPDATE orders SET iscomplet=true WHERE id={}".format(int(id))
     cur.execute(sql)
     conn.commit()
     conn.close()
@@ -71,6 +71,15 @@ def kypi_banan():
         to_db(name, email, phone, city, street, house, coords, howmany, color, price)
         return render_template("kypi_banan.html", isOk=True)
     return render_template("kypi_banan.html", isOk=False)
+
+
+@app.route("/admin/orders/update/", methods=["get", "post"])
+def update_order():
+    if request.method == "POST":
+        id = request.form.get("id")
+        print(id)
+        update_db(id)
+    return redirect("/admin/orders/")
 
 
 @app.route("/admin/orders/")

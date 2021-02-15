@@ -6,18 +6,19 @@
 <body>
     <table border="1" style="border-collapse:collapse">
         <tr>
-          <th>id</th>
-          <th>Имя</th>
-          <th>email</th>
-          <th>Номер телефона</th>
-          <th>Город</th>
-          <th>Улица</th>
-          <th>Дом</th>
-          <th>Координаты</th>
-          <th>Количество</th>
-          <th>Цвет</th>
-          <th>Цена</th>
-          <th>Статус</th>
+            <th>id</th>
+            <th>Имя</th>
+            <th>email</th>
+            <th>Номер телефона</th>
+            <th>Город</th>
+            <th>Улица</th>
+            <th>Дом</th>
+            <th>Координаты</th>
+            <th>Количество</th>
+            <th>Цвет</th>
+            <th>Цена</th>
+            <th>Статус</th>
+            <th>Изменение статуса</th>
         </tr>
         {% for order in orders %}
             <tr>
@@ -34,8 +35,15 @@
                 <th>{{ order[10] }}</th>
                 {% if order[11] == 0 %}
                     <th bgcolor="red">Не выполнен</th>
+                    <th>
+                        <form action="/admin/orders/update/" method="post">
+                            <input type="hidden" name="id" value="{{ order[0] }}">
+                            <input type="submit" placeholder="Выполнен">
+                        </form>
+                    </th>
                 {% else %}
                     <th bgcolor="lime">Выполнен</th>
+                    <th>Не меняем</th>
                 {% endif %}
             </tr>
         {% endfor %}
