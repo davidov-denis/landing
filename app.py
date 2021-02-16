@@ -50,7 +50,7 @@ def update_db(id):
 
 @app.route('/')
 def hello_world():
-    return render_template("index.html")
+    return render_template("customer/index.html")
 
 
 @app.route("/kypi-banan/", methods=["POST", "GET"])
@@ -69,8 +69,8 @@ def kypi_banan():
         price = int(howmany) * 6 * 10 ** 7
         print(price)
         to_db(name, email, phone, city, street, house, coords, howmany, color, price)
-        return render_template("kypi_banan.html", isOk=True)
-    return render_template("kypi_banan.html", isOk=False)
+        return render_template("customer/kypi_banan.html", isOk=True)
+    return render_template("customer/kypi_banan.html", isOk=False)
 
 
 @app.route("/admin/orders/update/", methods=["get", "post"])
@@ -87,7 +87,7 @@ def uncomplite_order():
     if "isAuth" in session:
         if session.get("isAuth") == True:
             all_table = from_db_is_complete_false()
-            return render_template("orders.html", orders=all_table)
+            return render_template("admin/orders.html", orders=all_table)
         else:
             return redirect("/admin/")
     else:
@@ -100,7 +100,7 @@ def complite_order():
     if "isAuth" in session:
         if session.get("isAuth") == True:
             all_table = from_db_is_complete_true()
-            return render_template("orders.html", orders=all_table)
+            return render_template("admin/orders.html", orders=all_table)
         else:
             return redirect("/admin/")
     else:
@@ -113,7 +113,7 @@ def order():
     if "isAuth" in session:
         if session.get("isAuth") == True:
             all_table = from_db_all()
-            return render_template("orders.html", orders=all_table)
+            return render_template("admin/orders.html", orders=all_table)
         else:
             return redirect("/admin/")
     else:
@@ -124,12 +124,12 @@ def order():
 def admin():
     if "isAuth" in session:
         if session.get("isAuth") == True:
-            return render_template("isAuth.html")
+            return render_template("admin/isAuth.html")
         else:
-            return render_template("login.html")
+            return render_template("admin/login.html")
     else:
         session["isAuth"] = False
-        return render_template("login.html")
+        return render_template("admin/login.html")
 
 
 @app.route("/check/", methods=["get", "post"])
@@ -147,13 +147,13 @@ def price_counter():
         howmany = request.form.get("howmany")
         price = int(howmany) * 6 * 10 ** 7
         howmany = int(howmany) * 1000
-        return render_template("price_counter.html", howmany=howmany, price=price, printable=True)
-    return render_template("price_counter.html", printable=printable)
+        return render_template("customer/price_counter.html", howmany=howmany, price=price, printable=True)
+    return render_template("customer/price_counter.html", printable=printable)
 
 
 @app.route("/contact/")
 def contact():
-    return render_template("contact.html")
+    return render_template("customer/contact.html")
 
 # UPDATE orders SET iscomplet=true WHERE id=5; ОБНОВЛЕНИЕ БАЗЫ ДАННЫХ
 # SELECT * FROM orders;

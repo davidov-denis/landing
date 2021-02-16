@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+    <form action="" method="post">
+        <input name="howmany" type="number" {% if printable %} value="{{ howmany }}" {% endif %} placeholder="Количество партий по 1000кг">
+        <input type="submit" placeholder="Расчитать">
+    </form>
+    {% if printable %}
+        <p>{{ howmany }} кг бананов - {{ price }} &#8381;</p>
+    {% endif %}
+{% endblock %}
