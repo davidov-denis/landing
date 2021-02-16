@@ -82,6 +82,32 @@ def update_order():
     return redirect("/admin/orders/")
 
 
+@app.route("/admin/orders/atwork")
+def uncomplite_order():
+    if "isAuth" in session:
+        if session.get("isAuth") == True:
+            all_table = from_db_is_complete_false()
+            return render_template("orders.html", orders=all_table)
+        else:
+            return redirect("/admin/")
+    else:
+        return redirect("/admin/")
+
+
+
+@app.route("/admin/orders/complete")
+def complite_order():
+    if "isAuth" in session:
+        if session.get("isAuth") == True:
+            all_table = from_db_is_complete_true()
+            return render_template("orders.html", orders=all_table)
+        else:
+            return redirect("/admin/")
+    else:
+        return redirect("/admin/")
+
+
+
 @app.route("/admin/orders/")
 def order():
     if "isAuth" in session:
