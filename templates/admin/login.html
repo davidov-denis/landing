@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "admin_base.html" %}
+{% block content %}
     <form method="post" action="/check/">
         <input type="password" name="password">
         <input type="submit">
     </form>
-</body>
-</html>
+{% endblock %}

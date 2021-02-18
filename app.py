@@ -82,7 +82,7 @@ def update_order():
     return redirect("/admin/orders/")
 
 
-@app.route("/admin/orders/atwork")
+@app.route("/admin/orders/atwork/")
 def uncomplite_order():
     if "isAuth" in session:
         if session.get("isAuth") == True:
@@ -95,7 +95,7 @@ def uncomplite_order():
 
 
 
-@app.route("/admin/orders/complete")
+@app.route("/admin/orders/complete/")
 def complite_order():
     if "isAuth" in session:
         if session.get("isAuth") == True:

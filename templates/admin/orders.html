@@ -1,9 +1,5 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title></title>
-  </head>
-<body>
+{% extends "admin_base.html" %}
+{% block content %}
     <table border="1" style="border-collapse:collapse">
         <tr>
             <th>id</th>
@@ -48,3 +44,4 @@
             </tr>
         {% endfor %}
     </table>
+{% endblock %}

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Админ-панель</title>
+</head>
+<body>
+    <ul>
+        <li><a href="/">Покупатели</a></li>
+        <li><a href="/admin/orders/">Все заказы</a></li>
+        <li><a href="/admin/orders/complete/">Выполненые</a></li>
+        <li><a href="/admin/orders/atwork/">В работе</a></li>
+    </ul>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>
